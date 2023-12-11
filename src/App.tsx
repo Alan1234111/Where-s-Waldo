@@ -1,8 +1,13 @@
-import {RouterProvider, createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 
 import GlobalStyles from "./styles/Global";
-import {Home} from "./components/Home";
-import {Game} from "./components/Game";
+import { Home } from "./components/Home";
+import { Game } from "./components/Game";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

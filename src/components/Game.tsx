@@ -1,16 +1,17 @@
-import {StyledGame} from "../styles/Game.styled";
-import {StyledDropdown} from "../styles/Dropdown.styled";
-import {GameHeader} from "./GameHeader";
-import {StyledCursorClicked} from "../styles/CursorClicked.styled";
-import {Footer} from "./Footer";
-import {WinModal} from "./WinModal";
-import {useEffect, useState} from "react";
+import { StyledGame } from "../styles/Game.styled";
+import { StyledDropdown } from "../styles/Dropdown.styled";
+import { GameHeader } from "./GameHeader";
+import { StyledCursorClicked } from "../styles/CursorClicked.styled";
+import { Footer } from "./Footer";
+import { WinModal } from "./WinModal";
+import { useEffect, useState } from "react";
 import santawadlo from "../assets/santawaldo.png";
 import character1 from "../assets/character1.png";
 import character2 from "../assets/character2.png";
 import character3 from "../assets/character3.png";
+import toast, { Toaster } from "react-hot-toast";
 
-type Coords = {x: number; y: number};
+type Coords = { x: number; y: number };
 
 const temporaryDB = [
   {
@@ -57,48 +58,74 @@ export const Game = () => {
   const [isWin, setIsWin] = useState(false);
 
   useEffect(() => {
-    const characterLeftLength = characters.filter((character) => character.found !== true).length;
+    const characterLeftLength = characters.filter(
+      (character) => character.found !== true
+    ).length;
 
     if (characterLeftLength <= 0) {
       setIsWin(true);
     }
   }, [characters]);
 
-  const normalizeCoordinates = (x: number, y: number, screenWidth: number, screenHeight: number) => {
+  const normalizeCoordinates = (
+    x: number,
+    y: number,
+    screenWidth: number,
+    screenHeight: number
+  ) => {
     const normalizedX = x / screenWidth;
     const normalizedY = y / screenHeight;
 
     const roundedX = Math.round(normalizedX * 100) / 100;
     const roundedY = Math.round(normalizedY * 100) / 100;
 
-    return {x: roundedX, y: roundedY};
+    return { x: roundedX, y: roundedY };
   };
 
-  const handleGuess = (characterId: string, characterCoords: Coords) => {
+  const handleGuess = (
+    characterName: string,
+    characterId: string,
+    characterCoords: Coords
+  ) => {
     const tolerance = 0.03;
 
-    const toleranceX = Math.abs(clickPosition.x - characterCoords.x) <= tolerance;
-    const toleranceY = Math.abs(clickPosition.y - characterCoords.y) <= tolerance;
+    const toleranceX =
+      Math.abs(clickPosition.x - characterCoords.x) <= tolerance;
+    const toleranceY =
+      Math.abs(clickPosition.y - characterCoords.y) <= tolerance;
 
     setSettingDropdown((prev) => ({
       ...prev,
       isShown: !prev.isShown,
     }));
+
     if (toleranceX && toleranceY) {
-      setCharacters((prev) => {
-        const indexToChange = prev.findIndex((character) => character._id === characterId);
-
-        if (indexToChange !== -1) {
-          const updatedCharacters = [...prev];
-
-          updatedCharacters[indexToChange] = {...updatedCharacters[indexToChange], found: true};
-
-          return updatedCharacters;
-        }
-
-        return prev;
-      });
+      toast.success(`You Found ${characterName} `);
+      updateCharacterFoundStatus(characterId);
+    } else {
+      toast.error("Try Again!");
     }
+  };
+
+  const updateCharacterFoundStatus = (characterId: string) => {
+    setCharacters((prev) => {
+      const indexToChange = prev.findIndex(
+        (character) => character._id === characterId
+      );
+
+      if (indexToChange !== -1) {
+        const updatedCharacters = [...prev];
+
+        updatedCharacters[indexToChange] = {
+          ...updatedCharacters[indexToChange],
+          found: true,
+        };
+
+        return updatedCharacters;
+      }
+
+      return prev;
+    });
   };
 
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
@@ -110,7 +137,12 @@ export const Game = () => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    const coords = normalizeCoordinates(mouseX, mouseY, screenWidth, screenHeight);
+    const coords = normalizeCoordinates(
+      mouseX,
+      mouseY,
+      screenWidth,
+      screenHeight
+    );
 
     setClickPosition(coords);
     showDropdown(coords);
@@ -143,16 +175,39 @@ export const Game = () => {
     <StyledGame>
       <GameHeader />
       <div className="photo-container">
-        <img className="game-photo" src={santawadlo} onClick={handleClick} />
+        <img
+          className="game-photo"
+          src={santawadlo}
+          onClick={handleClick}
+        />
+        <Toaster
+          containerStyle={{
+            position: "fixed",
+            top: 110,
+          }}
+        />
         {settingDropdown.isShown && (
           <>
-            <StyledCursorClicked $x={clickPosition.x * 100} $y={clickPosition.y * 100} />
+            <StyledCursorClicked
+              $x={clickPosition.x * 100}
+              $y={clickPosition.y * 100}
+            />
 
-            <StyledDropdown $x={settingDropdown?.xCord} $y={settingDropdown?.yCord}>
+            <StyledDropdown
+              $x={settingDropdown?.xCord}
+              $y={settingDropdown?.yCord}
+            >
               {characters.map((character) => {
                 if (!character.found) {
                   return (
-                    <button onClick={() => handleGuess(character._id, {x: character.cordX, y: character.cordY})}>
+                    <button
+                      onClick={() =>
+                        handleGuess(character.name, character._id, {
+                          x: character.cordX,
+                          y: character.cordY,
+                        })
+                      }
+                    >
                       <img src={character.img} />
                       <p>{character.name}</p>
                     </button>
