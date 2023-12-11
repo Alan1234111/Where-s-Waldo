@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-
+import { NotFound } from "./components/NotFound";
 import GlobalStyles from "./styles/Global";
 import { Home } from "./components/Home";
 import { Game } from "./components/Game";
@@ -14,6 +14,7 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route index element={<Home />} />
       <Route path="/game/:id" element={<Game />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
