@@ -1,5 +1,5 @@
-import {StyledHomeHeader} from "../styles/HomeHeader.styled";
-import {Link} from "react-router-dom";
+import { StyledHomeHeader } from "../styles/HomeHeader.styled";
+import { Link } from "react-router-dom";
 
 export const HomeHeader = () => {
   return (

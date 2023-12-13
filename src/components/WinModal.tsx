@@ -1,11 +1,18 @@
-import {StyledWinModal} from "../styles/WinModal.styled";
+import { StyledWinModal } from "../styles/WinModal.styled";
+import { StyledWall } from "../styles/Wall.styled";
 
-export const WinModal = () => {
+type PropsWinModal = {
+  time: number;
+};
+
+// to do
+
+export const WinModal = ({ time }: PropsWinModal) => {
   return (
     <>
       <StyledWinModal>
         <div>
-          <h3>You finished in 36.211s!</h3>
+          <h3>You finished in {time}!</h3>
           <h4>Submit your score to the leaderboard</h4>
         </div>
         <form>
@@ -14,18 +21,7 @@ export const WinModal = () => {
           <button>Submit</button>
         </form>
       </StyledWinModal>
-      <div
-        style={{
-          position: "fixed",
-          top: "0",
-          left: "0",
-          bottom: "0",
-          right: "0",
-          backgroundColor: "black",
-          zIndex: "101",
-          opacity: "0.3",
-        }}
-      />
+      <StyledWall />
     </>
   );
 };

@@ -1,21 +1,12 @@
 import styled from "styled-components";
 
-export const StyledChooseGame = styled.div`
+export const StyledGameChooseContainer = styled.section`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  margin: 1em auto;
-  color: #e2e8f0;
+  align-items: flex-start;
+  gap: 2em;
+  margin-top: 1em;
 
-  section {
-    display: flex;
-    align-items: flex-start;
-    gap: 2em;
-    margin-top: 2em;
-  }
-
-  section div {
+  div {
     display: flex;
     flex-direction: column;
     border-radius: 16px;
@@ -26,10 +17,11 @@ export const StyledChooseGame = styled.div`
 
     & img {
       order: 1;
-      height: 400px;
-      width: 100%;
+      height: 300px;
+      width: 350px;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
+      object-fit: cover;
     }
 
     & h3 {
@@ -45,7 +37,9 @@ export const StyledChooseGame = styled.div`
       color: #ffffff;
       cursor: pointer;
       display: inline-block;
-      font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: Roobert, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol";
       max-width: 50%;
       padding: 0.7em 1.5em;
       margin: 1em auto 0;

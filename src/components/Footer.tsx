@@ -1,5 +1,5 @@
 import githubMark from "../assets/github-mark-white.svg";
-import {StyledFooter} from "../styles/Footer.styled";
+import { StyledFooter } from "../styles/Footer.styled";
 
 export const Footer = () => {
   return (
