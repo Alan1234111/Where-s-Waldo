@@ -1,23 +1,22 @@
 import { StyledStartModal } from "../styles/StartModal.styled";
-import character1 from "../assets/character1.png";
-import character2 from "../assets/character2.png";
-import character3 from "../assets/character3.png";
 import { StyledWall } from "../styles/Wall.styled";
+import { character } from "../types";
 
-// to do
 
 type PropsStartModal = {
+  characters: character[]
   setIsClockRunning: React.Dispatch<React.SetStateAction<boolean>>;
   setShowStartModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const StartModal = ({
-  setIsClockRunning,
+  characters,
   setShowStartModal,
-  startTimer,
+  setIsClockRunning,
 }: PropsStartModal) => {
+
   const handleStart = () => {
-    startTimer();
+    setIsClockRunning(true);
     setShowStartModal(false);
   };
 
@@ -27,18 +26,14 @@ export const StartModal = ({
         <h2>You need to find 3 characters</h2>
 
         <div className="characters-container">
-          <div>
-            <img src={character1} />
-            <p>Black Elf</p>
-          </div>
-          <div>
-            <img src={character2} />
-            <p>Blond Elf</p>
-          </div>
-          <div>
-            <img src={character3} />
-            <p>Ladder Elf</p>
-          </div>
+          {characters.map(character => {
+            return (
+              <div>
+                <img src={character.img} alt="" />
+                <p>{character.name}</p>
+              </div>
+            )
+          })}
         </div>
 
         <button onClick={handleStart}>Start a Game</button>

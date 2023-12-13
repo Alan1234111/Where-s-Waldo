@@ -3,7 +3,7 @@ import { GameHeader } from "./GameHeader";
 import { Footer } from "./Footer";
 import { StartModal } from "./StartModal";
 import { WinModal } from "./WinModal";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import santawadlo from "../assets/santawaldo.png";
 import character1 from "../assets/character1.png";
 import character2 from "../assets/character2.png";
@@ -54,32 +54,8 @@ export const Game = () => {
     yCord: 0,
   });
 
-  const time = useRef(0);
-  const isClockRunning = useRef(false);
-  const intervalId = useRef<number | null>(null);
-
-  // const [time, setTime] = useState(0);
-  // const [isClockRunning, setIsClockRunning] = useState(false);
-
-  const startTimer = () => {
-    isClockRunning.current = true;
-    intervalId.current = setInterval(() => {
-      time.current += 1;
-    }, 10);
-  };
-
-  console.log(time.current);
-
-  const stopTimer = () => {
-    isClockRunning.current = false;
-    clearInterval(intervalId.current!);
-  };
-
-  useEffect(() => {
-    return () => {
-      clearInterval(intervalId.current!);
-    };
-  }, []);
+  const [time, setTime] = useState(0);
+  const [isClockRunning, setIsClockRunning] = useState(false);
 
   useEffect(() => {
     checkWin();
@@ -92,7 +68,7 @@ export const Game = () => {
 
     if (characterLeftLength <= 0) {
       setIsWin(true);
-      isClockRunning.current = false;
+      setIsClockRunning(false)
     }
   };
 
@@ -206,7 +182,7 @@ export const Game = () => {
     <StyledGame>
       <GameHeader
         time={time}
-        intevalId={intervalId}
+        setTime={setTime}
         isClockRunning={isClockRunning}
       />
 
@@ -222,8 +198,8 @@ export const Game = () => {
 
       {showStartModal && (
         <StartModal
-          startTimer={startTimer}
-          setIsClockRunning={isClockRunning}
+          characters={characters}
+          setIsClockRunning={setIsClockRunning}
           setShowStartModal={setShowStartModal}
         />
       )}

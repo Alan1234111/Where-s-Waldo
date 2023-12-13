@@ -4,28 +4,35 @@ import character2 from "../assets/character2.png";
 import character3 from "../assets/character3.png";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { formatedTime } from "../services/formatedTime";
 
-// To do
 
-// type HeaderProps = {
-//   time: number;
-//   intevalId: React.Dispatch<React.SetStateAction<number>>;
-//   isClockRunning: boolean;
-// };
+type HeaderProps = {
+  time: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
+  isClockRunning: boolean;
+};
 
-export const GameHeader = ({ time }) => {
-  const minutes = Math.floor((time.current % 360000) / 6000);
-  const seconds = Math.floor((time.current % 6000) / 100);
-  const milliseconds = time.current % 100;
+export const GameHeader = ({ time,setTime, isClockRunning }: HeaderProps) => {
+  const {minutes, seconds, milliseconds} = formatedTime(time);
+
+  useEffect(() => {
+    let intervalId: number;
+    if (isClockRunning) {
+      intervalId = setInterval(() => setTime((prevTime) => prevTime + 1), 10);
+    }
+    return () => clearInterval(intervalId);
+  }, [isClockRunning]);
+
 
   return (
     <StyledGameHeader>
       <Link to="/">Where's Waldo</Link>
 
       <p className="timer">
-        {`${minutes.toString().padStart(2, "0")}`}:
-        {`${seconds.toString().padStart(2, "0")}`}:
-        {`${milliseconds.toString().padStart(2, "0")}`}
+        {`${minutes}`}:
+        {`${seconds}`}:
+        {`${milliseconds}`}
       </p>
 
       <div>
