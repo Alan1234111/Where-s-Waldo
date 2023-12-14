@@ -4,44 +4,17 @@ import { Footer } from "./Footer";
 import { StartModal } from "./StartModal";
 import { WinModal } from "./WinModal";
 import { useEffect, useState } from "react";
-import santawadlo from "../assets/santawaldo.png";
-import character1 from "../assets/character1.png";
-import character2 from "../assets/character2.png";
-import character3 from "../assets/character3.png";
 import toast from "react-hot-toast";
 import { GameMapContainer } from "./GameMapContainer";
 import { Coords } from "../types";
-
-const temporaryDB = [
-  {
-    _id: "1",
-    name: "Black elf",
-    xCord: 0.41,
-    yCord: 0.76,
-    img: character1,
-    found: false,
-  },
-  {
-    _id: "2",
-    name: "Blond elf",
-    xCord: 0.34,
-    yCord: 0.4,
-    img: character2,
-    found: false,
-  },
-
-  {
-    _id: "3",
-    name: "Ladder elf",
-    xCord: 0.95,
-    yCord: 0.62,
-    img: character3,
-    found: false,
-  },
-];
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 export const Game = () => {
-  const [characters, setCharacters] = useState(temporaryDB);
+  const params = useParams();
+  const [characters, setCharacters] = useState([{}]);
+  const [gameMap, setGameMap] = useState("");
   const [isWin, setIsWin] = useState(false);
   const [showStartModal, setShowStartModal] = useState(true);
   const [settingDropdown, setSettingDropdown] = useState({
@@ -58,6 +31,14 @@ export const Game = () => {
   const [isClockRunning, setIsClockRunning] = useState(false);
 
   useEffect(() => {
+    const docRef = doc(db, "game", params.id);
+    getDoc(docRef).then((doc) => {
+      setCharacters(doc.data().characters);
+      setGameMap(doc.data().img);
+    });
+  }, []);
+
+  useEffect(() => {
     checkWin();
   }, [characters]);
 
@@ -68,7 +49,7 @@ export const Game = () => {
 
     if (characterLeftLength <= 0) {
       setIsWin(true);
-      setIsClockRunning(false)
+      setIsClockRunning(false);
     }
   };
 
@@ -114,6 +95,8 @@ export const Game = () => {
       screenWidth,
       screenHeight
     );
+
+    console.log(coords);
 
     setClickPosition(coords);
     showDropdown(coords);
@@ -184,10 +167,11 @@ export const Game = () => {
         time={time}
         setTime={setTime}
         isClockRunning={isClockRunning}
+        characters={characters}
       />
 
       <GameMapContainer
-        mapImage={santawadlo}
+        mapImage={gameMap}
         characters={characters}
         settingDropdown={settingDropdown}
         handleClick={handleClick}

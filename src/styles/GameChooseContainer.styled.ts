@@ -6,7 +6,8 @@ export const StyledGameChooseContainer = styled.section`
   gap: 2em;
   margin-top: 1em;
 
-  div {
+  div,
+  a {
     display: flex;
     flex-direction: column;
     border-radius: 16px;
@@ -14,11 +15,13 @@ export const StyledGameChooseContainer = styled.section`
     text-align: center;
     color: #e2e8f0;
     padding-bottom: 1em;
+    text-decoration: none;
+    transition: 0.2s;
 
     & img {
       order: 1;
-      height: 300px;
-      width: 350px;
+      width: 250px;
+      height: 250px;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
       object-fit: cover;
@@ -27,6 +30,7 @@ export const StyledGameChooseContainer = styled.section`
     & h3 {
       order: 2;
       margin-top: 1em;
+      font-size: 1rem;
     }
 
     & a {
@@ -41,7 +45,7 @@ export const StyledGameChooseContainer = styled.section`
         "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol";
       max-width: 50%;
-      padding: 0.7em 1.5em;
+      padding: 0.4em 1.2em;
       margin: 1em auto 0;
       font-size: 1rem;
       font-weight: 600;
@@ -68,5 +72,10 @@ export const StyledGameChooseContainer = styled.section`
         transform: translateY(0);
       }
     }
+  }
+
+  a:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
   }
 `;

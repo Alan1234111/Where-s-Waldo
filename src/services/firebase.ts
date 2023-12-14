@@ -1,6 +1,10 @@
-import firebase from 'firebase/app';
-import 'firebase/auth'; // if you are using authentication
-import 'firebase/firestore'; // if you are using Firestore
+import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+} from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_KEY,
@@ -8,9 +12,13 @@ const firebaseConfig = {
   projectId: "where-s-waldo-2d851",
   storageBucket: "where-s-waldo-2d851.appspot.com",
   messagingSenderId: "22139261436",
-  appId: "1:22139261436:web:a66a5f967ef9b0be756279"
+  appId: "1:22139261436:web:a66a5f967ef9b0be756279",
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-export default firebase;
+export const db = getFirestore();
+
+export const gameRef = collection(db, "game");
+
+export const storage = getStorage(app);

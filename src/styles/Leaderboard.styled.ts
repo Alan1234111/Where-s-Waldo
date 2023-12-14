@@ -16,6 +16,7 @@ export const StyledLeaderboard = styled.div`
     width: 60%;
     border-collapse: collapse;
     font-size: 1rem;
+    margin-top: 1.5rem;
   }
 
   thead td:first-child {
