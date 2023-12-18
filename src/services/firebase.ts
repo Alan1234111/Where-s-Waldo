@@ -1,10 +1,6 @@
-import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-} from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import {initializeApp} from "firebase/app";
+import {getFirestore, collection} from "firebase/firestore";
+import {getStorage} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_KEY,
@@ -17,7 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore();
+export const db = getFirestore(app);
 
 export const gameRef = collection(db, "game");
 

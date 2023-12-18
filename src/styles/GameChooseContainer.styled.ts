@@ -7,16 +7,18 @@ export const StyledGameChooseContainer = styled.section`
   margin-top: 1em;
 
   div,
-  a {
+  button {
     display: flex;
     flex-direction: column;
+    align-items: center;
     border-radius: 16px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    text-align: center;
     color: #e2e8f0;
     padding-bottom: 1em;
     text-decoration: none;
     transition: 0.2s;
+    background-color: #111827;
+    border: none;
 
     & img {
       order: 1;
@@ -41,9 +43,7 @@ export const StyledGameChooseContainer = styled.section`
       color: #ffffff;
       cursor: pointer;
       display: inline-block;
-      font-family: Roobert, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       max-width: 50%;
       padding: 0.4em 1.2em;
       margin: 1em auto 0;
@@ -74,7 +74,7 @@ export const StyledGameChooseContainer = styled.section`
     }
   }
 
-  a:hover {
+  button:hover {
     transform: scale(1.05);
     opacity: 0.9;
   }

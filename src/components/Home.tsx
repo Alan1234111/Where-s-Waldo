@@ -1,29 +1,46 @@
-import { StyledHome } from "../styles/Home.styled";
-import { StyledGameChooseContainer } from "../styles/GameChooseContainer.styled";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { gameRef } from "../services/firebase";
-import { getDocs } from "firebase/firestore";
+import {StyledHome} from "../styles/Home.styled";
+import {StyledGameChooseContainer} from "../styles/GameChooseContainer.styled";
+import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {gameRef} from "../services/firebase";
+import {getDocs} from "firebase/firestore";
+import {character, leaderboard} from "../types";
+
+type Game = {
+  id: string;
+  name: string;
+  img: string;
+  thumbnailImg: string;
+  characters: character[];
+  leaderboard: leaderboard[];
+};
 
 export const Home = () => {
-  const [games, setGames] = useState();
+  const [games, setGames] = useState<Game[]>([
+    {
+      id: "",
+      name: "",
+      img: "",
+      thumbnailImg: "",
+      characters: [{_id: "", img: "", found: false, name: "", xCord: 0, yCord: 0}],
+      leaderboard: [{date: 0, time: 0, username: ""}],
+    },
+  ]);
 
   useEffect(() => {
-    getDocs(gameRef)
-      .then((snapshot) => {
-        let games = [];
-        snapshot.docs.forEach((doc) => {
-          games.push({ ...doc.data(), id: doc.id });
-        });
+    const fetchData = async () => {
+      try {
+        const snapshot = await getDocs(gameRef);
+        const games = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id} as Game));
 
         setGames(games);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  console.log(games);
+    fetchData();
+  }, []);
 
   return (
     <StyledHome>

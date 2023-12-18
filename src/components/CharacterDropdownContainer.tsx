@@ -1,4 +1,4 @@
-import { handleGuess } from "../types";
+import {handleGuess} from "../types";
 
 type PropsCharacterDropdownContainer = {
   _id: string;
@@ -9,14 +9,7 @@ type PropsCharacterDropdownContainer = {
   handleGuess: handleGuess;
 };
 
-export const CharacterDropdownContainer = ({
-  _id,
-  name,
-  xCord,
-  yCord,
-  img,
-  handleGuess,
-}: PropsCharacterDropdownContainer) => {
+export const CharacterDropdownContainer = ({_id, name, xCord, yCord, img, handleGuess}: PropsCharacterDropdownContainer) => {
   return (
     <button
       onClick={() =>
