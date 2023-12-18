@@ -36,7 +36,23 @@ export const StyledGameHeader = styled.header`
   }
 
   @media (max-width: 768px) {
-    padding: 1em 1em;
+    position: aboslute;
+    flex-direction: column;
+    padding: 0.3em 1em;
     text-align: center;
+
+    div {
+      & img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+    a {
+      display: none;
+    }
+
+    .timer {
+      margin: 0.5rem 0;
+    }
   }
 `;

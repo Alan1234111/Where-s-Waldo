@@ -25,4 +25,13 @@ export const StyledHomeHeader = styled.header`
       background-color: #374151;
     }
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+
+    a:nth-child(1) {
+      margin: 0.5em 0;
+    }
+  }
 `;

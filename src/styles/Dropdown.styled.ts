@@ -45,7 +45,7 @@ export const StyledDropdown = styled.div<{$x?: number; $y?: number}>`
 
     button {
       margin: 0.4em 0;
-      width: 70px;
+      width: 50px;
       border: none;
       box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
       cursor: pointer;
@@ -53,14 +53,14 @@ export const StyledDropdown = styled.div<{$x?: number; $y?: number}>`
 
       & p {
         margin: 0 auto;
-        font-size: 0.5rem;
+        font-size: 0.3rem;
       }
 
       & img {
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         object-fit: cover;
       }
     }

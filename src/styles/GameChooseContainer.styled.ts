@@ -78,4 +78,8 @@ export const StyledGameChooseContainer = styled.section`
     transform: scale(1.05);
     opacity: 0.9;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;

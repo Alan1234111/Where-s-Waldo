@@ -50,4 +50,16 @@ export const StyledLeaderboard = styled.div`
   td {
     padding: 0.8em 6em 0.8em 0.5em;
   }
+
+  @media (max-width: 768px) {
+    table {
+      width: 10%;
+    }
+
+    td {
+      padding: 0.8em 0.5em 0.8em 0.5em;
+      max-width: 100px;
+      overflow: hidden;
+    }
+  }
 `;

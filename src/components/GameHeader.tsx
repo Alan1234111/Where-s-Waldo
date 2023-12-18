@@ -30,7 +30,7 @@ export const GameHeader = ({time, setTime, isClockRunning, characters}: HeaderPr
 
       <div>
         {characters.map((character) => (
-          <img src={character.img} alt="" />
+          <img key={character._id} src={character.img} alt="" />
         ))}
       </div>
     </StyledGameHeader>

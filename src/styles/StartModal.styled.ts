@@ -13,8 +13,7 @@ export const StyledStartModal = styled.div`
   width: 500px;
   height: 300px;
   background-color: #111827;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   color: #ffffff;
   border-radius: 12px;
   z-index: 103;
@@ -45,9 +44,7 @@ export const StyledStartModal = styled.div`
     color: #ffffff;
     cursor: pointer;
     display: inline-block;
-    font-family: Roobert, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
-      "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     max-width: 50%;
     padding: 0.7em 1.5em;
     margin: 1em auto 0;
@@ -76,5 +73,26 @@ export const StyledStartModal = styled.div`
       box-shadow: none;
       transform: translateY(0);
     }
+  }
+
+  @media (max-width: 768px) {
+    height: 250px;
+    width: 300px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    margin: 0em 0 1em;
+  }
+
+  .characters-container {
+    & div img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  button {
+    padding: 0.6em 1em;
   }
 `;
